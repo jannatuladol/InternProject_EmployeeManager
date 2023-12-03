@@ -1,0 +1,156 @@
+﻿@model EmployeeManager.Models.Applicant
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Delete</h1>
+
+<h4>Applicant</h4>
+<hr />
+<div class="col-11 mx-auto pt-0 p-0">
+    <div class="bg-danger text-center">
+        <h1>
+            Are you sure you want to delete this?
+        </h1>
+        </div>
+
+
+
+
+        <div class="card">
+        <div class="card-header text-center bg-info text-white" style="height:45px;">
+            <h4>
+                Delete Applicant Profile
+            </h4> 
+
+        </div>
+        <form ID="ApplicantForm"  enctype="multipart/form-data" asp-action="delete">
+            <input type="hidden" asp-for="Id" />
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control-plaintext" readonly />
+
+                    </div>
+
+                    </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Gender" class="control-label"></label>
+                        <input asp-for="Gender" class="form-control-plaintext" readonly />
+                    </div>  
+
+                    </div>
+
+                <div class ="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Age" class="control-label"></label>
+                        <input asp-for="Age" class="form-control-plaintext" readonly />
+                    </div>
+                    </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Qualification" class="control-label"></label>
+                        <input asp-for="Qualification" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="form-group">
+                        <label asp-for="Phone" class="control-label"></label>
+                        <input asp-for="Phone" class="form-control-plaintext" readonly />
+                    </div>
+                </div>
+
+                <div class="col-md-6 btn-group">
+                   <img src="~/images/@Model.PhotoUrl" alt="Profile Photo" class="img-fluid" />
+                    
+                 </div>
+
+                <div class="col-md-12">
+                    <table id="EduTable" class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    DegreeName
+                                </th>
+                                <th>
+                                    Institution
+                                </th>
+                                <th>
+                                    PassingYear
+                                </th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            
+
+                            @for (int i = 0; i < Model.EducationQualifications.Count; i++)
+                            {
+                                <tr>
+                                   
+                                    <td>
+                                       
+                                        <input asp-for="@Model.EducationQualifications[i].DegreeName" class="form-control-plaintext bg-light" readonly />
+                                        
+                                        
+                                    </td>
+                                    <td>
+                                    <input asp-for="@Model.EducationQualifications[i].Institution" class="form-control-plaintext" readonly />
+                                    </td>
+                                    <td>
+                                        <input asp-for="@Model.EducationQualifications[i].PassingYear" class="form-control-plaintext" readonly />
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                 
+                                </tr>
+                               
+                            }
+
+                        </tbody>
+
+
+                    </table>
+
+                </div>
+                <input type="hidden" id="hdnLastIndex" value="0"/>
+
+
+                    <div class="col-12 btn-group">
+                        <div class=" col-6 form-group text-right p-2">
+                            <a asp-action="Index" class="btn btn-secondary">&nbsp;Back&nbsp;</a>
+
+                        </div>
+                        <div class=" col-6 form-group text-right p-2">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+
+                        </div>
+
+                    </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+
+}
